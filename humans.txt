@@ -1,0 +1,8 @@
+/* TEAM */
+Rodion Sorokin, founder
+Contact: rodion@curiosityoffice.com
+Location: Paris, France
+
+/* SITE */
+Language: English
+Standards: HTML5, CSS3

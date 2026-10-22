@@ -32,3 +32,13 @@ MX records for email (rodion@curiosityoffice.com) stay as they are.
 - `index.html` holds all markup and CSS.
 - `img/` holds the drawings and client logos.
 - Body font: Graphik is listed first in `--sans`; until woff2 files are added and declared with `@font-face`, browsers fall back to Inter from Google Fonts. Testimonials use Crimson Pro italic.
+
+## Search and AI discovery
+
+Kept in `index.html` `<head>` and at the root; carry them over when replacing `index.html`:
+
+- Title, description, canonical, hreflang, Open Graph and Twitter tags (share image `img/og.jpg`, 1200×630).
+- JSON-LD (`@graph`): WebSite, WebPage, Person (Rodion Sorokin), ProfessionalService (Curiosity Office) with the three offers as an OfferCatalog. Update it when offers or prices change.
+- Favicons: `favicon.ico`, `img/favicon-16.png`, `img/favicon-32.png`, `apple-touch-icon.png`, `img/icon-192.png`, `img/icon-512.png`, `site.webmanifest`.
+- `robots.txt`, `sitemap.xml` (bump `lastmod` on content changes), `llms.txt` (plain-language summary for AI assistants; keep in sync with the page), `humans.txt`.
+- Images below the fold have `loading="lazy" decoding="async"`.
