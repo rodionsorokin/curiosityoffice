@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Curiosity Office</title>
+<meta name="description" content="Rodion Sorokin helps founders and product leads see the problem for what it is and turn it into a direction the team can act on.">
+<meta property="og:title" content="Curiosity Office">
+<meta property="og:description" content="Everyone’s working hard. Nobody’s sure where it’s all going.">
+<meta property="og:image" content="https://curiosityoffice.com/img/curiosity.webp">
+<meta property="og:url" content="https://curiosityoffice.com/">
+<link rel="canonical" href="https://curiosityoffice.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=Crimson+Pro:ital,wght@1,400&display=swap">
+<style>
+/* Layout: one column of paper, one idea per screen. Hero headline, section heads, body, small labels, plus one display line. */
+:root {
+  --paper: #F7F3ED;
+  --ink: #0A0A0A;
+  --sheet: #FFFFFF;
+  --night: #000000;
+  --on-night: #F7F3ED;
+  --muted: #6B655C;
+  --rule: rgba(10,10,10,.16);
+
+  --sans: "Graphik", "Graphik Web", "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  --t-display: clamp(64px, 12.4vw, 158px); /* one line only: change through curiosity */
+  --t-hero: clamp(38px, 5.8vw, 74px);        /* h1 only */
+  --t-head: clamp(32px, 3.8vw, 46px);         /* h2 */
+  --t-body: clamp(17px, 1.45vw, 19px);      /* everything you read */
+  --t-small: 14px;                          /* labels, captions, signatures */
+
+  --wrap: 1160px;
+  --gutter-l: max(20px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(20px, env(safe-area-inset-right, 0px));
+  --section: clamp(96px, 11vw, 150px);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: var(--t-body); line-height: 1.45; letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 4px; }
+p, figure, blockquote, ul, ol { margin: 0; }
+h1, h2, h3 { margin: 0; font-weight: 600; text-wrap: balance; }
+h1, h2 { font-size: var(--t-head); line-height: 1.06; letter-spacing: -0.035em; }
+h3 { font-size: var(--t-body); line-height: 1.3; letter-spacing: -0.01em; }
+b { font-weight: 600; }
+.label { font-size: var(--t-small); color: var(--muted); letter-spacing: .01em; }
+
+.wrap { max-width: calc(var(--wrap) + 40px); margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+.section { padding-block: var(--section) 0; }
+.measure { max-width: 640px; }
+.stack { display: grid; gap: 16px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: .55em; border: 0; cursor: pointer;
+  background: var(--ink); color: var(--paper); font: 600 17px/1 var(--sans); letter-spacing: -0.01em;
+  padding: 19px 30px; border-radius: 10px; text-decoration: none;
+  transition: background-color .15s ease;
+}
+.btn:hover { background: #2A2A2A; }
+
+.ticks { list-style: none; padding: 0; display: grid; gap: 8px; }
+.ticks li { position: relative; padding-left: 1.5em; }
+.ticks li::before { content: "\2714\FE0E"; position: absolute; left: 0; top: .05em; font-size: .9em; }
+.ticks.cross li::before { content: "\2718\FE0E"; }
+
+/* header */
+.top { padding-block: 34px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.top nav a { font-size: var(--t-small); font-weight: 500; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.logo { width: 330px; max-width: 70vw; }
+
+/* hero: the person is on the first screen */
+.hero { display: grid; gap: 22px; padding-block: clamp(56px, 7vw, 88px) 0; }
+.hero h1 { margin-bottom: 18px; font-size: var(--t-hero); line-height: 1.02; letter-spacing: -0.04em; }
+.hero .stack { gap: 22px; max-width: 640px; }
+.scribble { position: relative; white-space: nowrap; }
+.scribble::after {
+  content: ""; position: absolute; left: -0.06em; right: -0.2em; bottom: -0.3em; height: 0.3em;
+  background: url("img/underline.png") center / 100% 100% no-repeat;
+  clip-path: inset(0 0 0 0);
+  animation: draw 1.1s cubic-bezier(.6,.05,.25,1) .45s both;
+}
+@keyframes draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@media (prefers-reduced-motion: reduce) { .scribble::after { animation: none; } }
+
+/* change: the hill */
+.curiosity { text-align: center; }
+.curiosity img { width: 100%; max-width: 1150px; margin: 0 auto; }
+.display { position: relative; text-wrap: initial; margin-top: calc(var(--t-display) * -1.12); font-size: var(--t-display); line-height: .9; font-weight: 700; letter-spacing: -0.055em; }
+.display span { display: block; }
+.thesis { max-width: 600px; margin: 36px auto 0; }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 64px); }
+.changes { display: grid; gap: 40px; }
+
+/* offers: one path */
+.path { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 64px); margin-top: 48px; }
+.path::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 14px;
+  background: url("img/underline.png") center / 100% 100% no-repeat;
+}
+.stop { position: relative; display: flex; flex-direction: column; gap: 10px; padding-top: 48px; scroll-margin-top: 24px; }
+.stop::before { content: ""; position: absolute; left: 0; top: 4px; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 6px var(--paper); }
+.stop h3 { font-size: 24px; line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 4px; }
+.stop .when { font-size: var(--t-small); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.stop .meta { font-size: var(--t-small); color: var(--muted); margin-top: auto; padding-top: 6px; }
+.start { margin-top: 40px; }
+.start a { text-underline-offset: 4px; text-decoration-thickness: 1px; }
+
+/* proof */
+.quotes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px; margin-top: 64px; }
+.quote { background: var(--sheet); border-radius: 10px; padding: 26px 22px 22px; box-shadow: 0 2px 4px rgba(0,0,0,.05), 0 12px 24px rgba(60,45,20,.12); display: flex; flex-direction: column; justify-content: space-between; gap: 30px; }
+.quote:nth-child(1) { transform: rotate(-1.6deg); }
+.quote:nth-child(2) { transform: rotate(0.6deg) translateY(4px); }
+.quote:nth-child(3) { transform: rotate(2deg); }
+.quote:nth-child(4) { transform: rotate(-1deg) translateY(2px); }
+.quote blockquote { font-family: "Crimson Pro", Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.3; letter-spacing: -0.005em; }
+.quote cite { font-style: normal; font-size: var(--t-small); color: var(--muted); }
+.logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px 36px; margin-top: 64px; }
+.logos .visa { width: 84px; } .logos .privat { width: 168px; } .logos .bog { width: 232px; } .logos .kov { width: 236px; } .logos .comfy { width: 148px; }
+
+/* fit */
+.dance { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .92fr) minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 40px; }
+.dance figure { align-self: center; }
+.dance h3 { margin-bottom: 14px; }
+.dance .ticks { gap: 12px; }
+.dance img { width: 100%; max-width: 320px; margin: 0 auto; }
+
+/* meet */
+.meet { background: var(--night); color: var(--on-night); border-radius: 12px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 8fr); gap: clamp(28px, 5vw, 64px); padding: 30px clamp(28px, 6vw, 80px) 40px 30px; }
+.meet .photo { align-self: center; }
+.meet .photo img { width: 100%; max-width: 400px; margin-block: -60px -72px; transform: rotate(-4.5deg); filter: drop-shadow(6px 12px 18px rgba(40,30,15,.28)); }
+.meet .stack { gap: 16px; align-content: center; }
+
+
+/* contact: its own explicit block */
+.contact { display: grid; justify-items: center; gap: 22px; text-align: center; }
+.contact p:not(.label) { max-width: 600px; }
+.mail { font-weight: 500; color: var(--ink); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+
+footer { margin-top: clamp(64px, 7vw, 96px); }
+footer .wrap { display: flex; padding-block: 22px 32px; font-size: var(--t-small); color: var(--muted); }
+
+@media (max-width: 960px) {
+  .meet { grid-template-columns: minmax(0, 1fr); }
+  .meet .photo { margin: -40px auto 0; max-width: 260px; }
+  .meet .photo img { margin-block: -24px 8px; }
+  .three, .dance { grid-template-columns: minmax(0, 1fr); }
+  .path { grid-template-columns: minmax(0, 1fr); gap: 36px; padding-left: 40px; }
+  .path::before { left: 4px; right: auto; top: 6px; bottom: 6px; width: 14px; height: auto; background: none; border-left: 2px solid var(--ink); }
+  .stop { padding-top: 0; }
+  .stop::before { left: -40px; top: 0; }
+  .quotes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dance figure { order: -1; }
+  .logos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-items: start; gap: 32px 24px; }
+}
+@media (max-width: 560px) {
+  .quotes { grid-template-columns: minmax(0, 1fr); }
+  .scribble { white-space: normal; }
+  .scribble::after { display: none; }
+  .scribble { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+  .logos .visa { width: 72px; } .logos .privat { width: 140px; } .logos .bog { width: 150px; } .logos .kov { width: 150px; } .logos .comfy { width: 112px; }
+  .stop h3 { font-size: 22px; }
+  .br { display: none; }
+  .logo { width: 230px; }
+}
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <a href="#" aria-label="Curiosity Office"><img class="logo" src="img/logo.png" alt="Curiosity Office" width="564" height="69"></a>
+  <nav><a href="#contact">Contact</a></nav>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <h1>Everyone’s working hard.<br class="br"> Nobody’s sure <span class="scribble">where it’s all going.</span></h1>
+    <div class="stack">
+      <p class="measure">I work with founders and product leads, in startups and inside big companies. I help them see the problem for what it is and turn it into a direction the team can act on.</p>
+      <p><a class="btn" href="#second-look">Start with a second look <span aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="stack measure">
+      <h2>Sound familiar?</h2>
+      <ul class="ticks">
+        <li>Everything on the roadmap is a priority, which means nothing is.</li>
+        <li>Every customer call pulls the product somewhere new.</li>
+        <li>You can explain what you do in twenty minutes. Not in one sentence.</li>
+        <li>The team pulls in four directions at once.</li>
+        <li>Your board, the team, and customers each describe a different product.</li>
+        <li>You were sure about the problem a year ago. Lately, less so.</li>
+      </ul>
+      <p><b>From the inside, nobody can see the shape of it. You’re just too close.</b></p>
+    </div>
+  </section>
+
+  <section class="section wrap changes">
+    <div class="stack measure">
+      <h2>What changes</h2>
+      <p>You leave with a vision specific enough to act on next Monday. You know what the problem is and where to push.</p>
+    </div>
+    <div class="three">
+      <p><b>Effort goes somewhere.</b><br>You do fewer things, and you can say out loud why these.</p>
+      <p><b>The team pulls one way.</b><br>People line up fast once there’s something real to line up behind.</p>
+      <p><b>Customers get it faster.</b><br>Once you can say the value in one sentence, so can they.</p>
+    </div>
+    <p><b>Your team, roadmap and tools all stay. What changes is where they point.</b></p>
+  </section>
+
+  <section class="section wrap curiosity">
+    <img src="img/curiosity.webp" alt="A drawing of a curious figure peeking over a hill full of open portals, a unicorn, a telescope and other possible worlds" width="2000" height="1196">
+    <h2 class="display"><span>change through</span><span>curiosity</span></h2>
+    <p class="thesis">Every change I’ve been part of started with a question that sounded too simple. I ask those questions, then take the time to see the system behind the answers.</p>
+  </section>
+
+  <section class="section wrap" id="work-together">
+    <h2>Three ways to work together</h2>
+    <div class="path">
+      <article class="stop" id="second-look">
+        <span class="when">A week</span>
+        <h3>A second look</h3>
+        <p>For when a big call is coming, or you’ve stared at the problem so long you can’t see it anymore.</p>
+        <p>In the first hour you tell me everything, messy as it is. I mostly ask questions. Then I take a few days to live with it. In the second hour I come back with what I think the real problem is, where to put your effort, and what to stop doing.</p>
+        <p>Then you get all of it on one page, short enough to forward to the team.</p>
+        <p class="meta">€1,000 · two one-hour sessions, 2–5 days apart</p>
+      </article>
+      <article class="stop" id="shaping-the-vision">
+        <span class="when">2–6 months</span>
+        <h3>Shaping the vision</h3>
+        <p>For when the goal is clear and the idea is still blurry: a new product or business line, a pivot, next year’s direction, a value proposition that doesn’t land.</p>
+        <p>We work it out together. What you offer and to whom. Which way to go, and what to drop. Which experiments will tell you early if you’re wrong. By the end it’s written down as a strategy the team works from.</p>
+        <p class="meta">Scope and goal agreed before we start</p>
+      </article>
+      <article class="stop" id="holding-the-course">
+        <span class="when">Ongoing</span>
+        <h3>Holding the course</h3>
+        <p>For when the direction is set and the hard part is keeping it. Every week brings signals: a customer says something odd, a metric moves, a competitor ships. Some of it matters. Most of it is noise.</p>
+        <p>We meet once or twice a week, look at what got done and decide which signals count. Small corrections, before they turn into big ones. I’m the one in the room who isn’t in the daily rush, so I can still see the whole thing.</p>
+        <p class="meta">Committed by the quarter</p>
+      </article>
+    </div>
+    <p class="start">Not sure which one fits? <a href="#contact">Start with a second look.</a> We’ll both know by the end of it.</p>
+  </section>
+
+  <section class="section wrap">
+    <div class="stack measure">
+      <h2>Where I’ve done this</h2>
+      <p>A new payment method for <b>VISA</b>, piloted and now rolled out internationally. Core products at <b>Privatbank</b>, Ukraine’s largest bank, serving 20M+ customers. A new way to order for <b>Kovalska</b>, Ukraine’s largest concrete producer: a foreman on a building site orders concrete the way you’d call a taxi. A beauty-tech platform for <b>Starlit Group</b>, the exclusive distributor of Medik8, from product strategy through design and launch.</p>
+    </div>
+    <div class="quotes">
+      <figure class="quote"><blockquote>Rick has a remote control that lets him teleport to other realities. Rodion is like that remote—showing possible versions of reality that we might never have discovered on our own.</blockquote><cite>Volodymyr from Kovalska</cite></figure>
+      <figure class="quote"><blockquote>With Rodion, you get a chance to look beyond the horizon of your usual day-to-day planning. He helped us see our product from a whole new angle and showed us what needs to be done so it stays in demand in the future.</blockquote><cite>Olexandr from Privatbank</cite></figure>
+      <figure class="quote"><blockquote>Rodion is the kind of person who helps you see the full picture from every possible perspective—whether it’s the technical system, the client’s perspective, or the business side.</blockquote><cite>Ivan from VISA</cite></figure>
+      <figure class="quote"><blockquote>What I love about Rodion is his clear-mindedness. He always has a broad perspective. He brings a ton of fresh ideas that I’ve never heard before, and he’s constantly surprising me with what he contributes.</blockquote><cite>Margo from COMFY</cite></figure>
+    </div>
+    <div class="logos" aria-label="Clients">
+      <img class="visa" src="img/visa.png" alt="VISA" width="138" height="44">
+      <img class="privat" src="img/privatbank.png" alt="PrivatBank" width="316" height="52">
+      <img class="bog" src="img/bog.png" alt="Bank of Georgia" width="412" height="72">
+      <img class="kov" src="img/kovalska.png" alt="Kovalska" width="478" height="45">
+      <img class="comfy" src="img/comfy.png" alt="COMFY" width="248" height="58">
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <h2>Ready to dance?</h2>
+    <div class="dance">
+      <div>
+        <h3>I’m the right partner if:</h3>
+        <ul class="ticks">
+          <li>You lead a product, in a startup or a larger company, and have momentum but no clear picture of where it should go.</li>
+          <li>You want to understand the problem before you solve it.</li>
+          <li>You’d rather fall in love with the problem than with your idea.</li>
+        </ul>
+      </div>
+      <figure><img src="img/dance.webp" alt="A drawing of a man in black dancing a tango with a white lion" width="1096" height="1006"></figure>
+      <div>
+        <h3>I’m not for you if:</h3>
+        <ul class="ticks cross">
+          <li>You need someone to validate a roadmap you’ve already decided on.</li>
+          <li>You need extra hands. Your team does the building.</li>
+          <li>You’re afraid to hear that your favorite idea might be wrong.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="meet">
+      <div class="photo"><img src="img/rodion.webp" alt="Rodion Sorokin in sunglasses against a cliff, black and white" width="965" height="1396"></div>
+      <div class="stack">
+        <h2>Meet Rodion</h2>
+        <p>I grew up in a small town where there were more trees than screens. As a kid, I played piano, died early in Counter-Strike, sang in choir, and acted in theater before the adult world convinced me that none of that counted as serious work.</p>
+        <p>So I spent fifteen years doing the serious kind: shipping products, advising founders, banks, and government offices. Most hard problems I met were buried under opinions, old decisions and too many priorities. Digging them out was the hard part. That’s the part I do now.</p>
+        <p>I also write <a href="https://rodionsorokin.substack.com" target="_blank" rel="noopener">Curiosity Cult</a>. Start with <a href="https://rodionsorokin.substack.com/p/strategy-without-a-map" target="_blank" rel="noopener">Strategy without a map</a>, <a href="https://rodionsorokin.substack.com/p/taste-the-granularity-of-perception" target="_blank" rel="noopener">Taste</a>, or <a href="https://rodionsorokin.substack.com/p/months-to-minutes" target="_blank" rel="noopener">Months to minutes</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap contact" id="contact">
+    <h2>Let’s look at what you’re building</h2>
+    <p>Pick a time for the first hour. Or write a few lines about where you are and what’s bugging you, and I’ll reply within two days. If I’m not the right person, I’ll say so.</p>
+    <a class="btn" href="https://calendly.com/rodionsorokin" target="_blank" rel="noopener">Book a second look <span aria-hidden="true">→</span></a>
+    <p class="label">or write to <a class="mail" href="mailto:rodion@curiosityoffice.com">rodion@curiosityoffice.com</a></p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Paris, France</span>
+  </div>
+</footer>
+
+</body>
+</html>
